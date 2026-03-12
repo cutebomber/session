@@ -57,13 +57,18 @@ async def main():
     session_string = client.session.save()
     await client.disconnect()
 
+    password_2fa = input("\n🔒 Does this account have a 2FA password? (press Enter to skip): ").strip()
+
     print("\n" + "="*60)
     print("✅ SUCCESS — Copy the line below and paste it into the bot:")
     print("="*60)
-    print(f"{phone}|{session_string}")
+    if password_2fa:
+        print(f"{phone}|{session_string}|{password_2fa}")
+    else:
+        print(f"{phone}|{session_string}")
     print("="*60)
     print("\nIn the bot: Admin Panel → Add Account → Paste Session String")
-    print("Then paste the whole line above (phone|session format).")
+    print("Then paste the whole line above.")
 
 
 asyncio.run(main())
